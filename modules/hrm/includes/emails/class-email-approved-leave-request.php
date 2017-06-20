@@ -65,8 +65,10 @@ class Approved_Leave_Request extends Email {
         if ( ! $this->get_recipient() ) {
             return;
         }
+	    $recipient = $this->get_recipient();
+	    $recipient = apply_filters( 'erp_leave_request_approved_notification_recipients', $recipient, $request_id);
 
-        $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        $this->send( $recipient, $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
     }
 
 }
